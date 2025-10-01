@@ -38,6 +38,8 @@ if __name__ == "__main__":
 
         try:
             result = calculate(a, b, action)
-            print("Result: ", result)
+            print("Result:", result)
+            with open("result.txt", "a") as result_file:
+                result_file.write(f"{a}{action}{b}={result}\n")
         except Exception as e:
             print("Error: ", e)
