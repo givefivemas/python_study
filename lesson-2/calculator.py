@@ -33,6 +33,12 @@ def get_number(prompt: str):
         except ValueError:
             print("Please enter a number.")
 
+def formatNumber(num):
+  if num % 1 == 0:
+    return int(num)
+  else:
+    return num
+
 
 if __name__ == "__main__":
     while True:
@@ -41,10 +47,12 @@ if __name__ == "__main__":
         action = input("Insert action: ")
         if action == "exit":
             print("Goodbye")
-            break
 
         try:
-            result = calculate(a, b, action)
+            result = formatNumber(calculate(a, b, action))
+            a=formatNumber(a)
+            b=formatNumber(b)
+
             print("Result:", result)
             with open(RESULT_FILE, "a") as result_file:
                 result_file.write(f"{a}{action}{b}={result}\n")
