@@ -1,4 +1,11 @@
+import json
 import operator
+
+with open("config.json", "r") as f:
+    config = json.load(f)
+
+ALLOWED_ACTIONS = config["allowed_actions"]
+RESULT_FILE = config["result_file"]
 
 def calculate(a: float, b: float, action: str) -> float:
     actions = {
@@ -9,7 +16,7 @@ def calculate(a: float, b: float, action: str) -> float:
         "**": operator.pow,
         "%": operator.mod,
     }
-    if action not in actions:
+    if action not in ALLOWED_ACTIONS:
         raise ValueError(f"Invalid action. Allowed: {', '.join(actions.keys())}")
     if action == "/" and b == 0:
         raise ZeroDivisionError("divide by zero")
@@ -39,7 +46,7 @@ if __name__ == "__main__":
         try:
             result = calculate(a, b, action)
             print("Result:", result)
-            with open("result.txt", "a") as result_file:
+            with open(RESULT_FILE, "a") as result_file:
                 result_file.write(f"{a}{action}{b}={result}\n")
         except Exception as e:
             print("Error: ", e)

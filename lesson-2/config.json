@@ -1,0 +1,4 @@
+{
+  "allowed_actions": ["+", "-", "*", "/", "**", "%"],
+  "result_file": "results.txt"
+}
